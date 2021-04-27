@@ -2204,7 +2204,7 @@ const main = async () => {
     throw `Error parsing application PR link (${prLink}).`
   } 
   
-  prNumber = prNumberMatches[0]
+  const prNumber = prNumberMatches[0]
   console.log(`PR number is ${prNumber}`)
   var client = github.client();
 
