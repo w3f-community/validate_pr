@@ -2198,13 +2198,13 @@ const main = async () => {
 
   const prNumberPattern = /(?<=pull\/)\d*/g
 
-  const prNumber = prLink.match(prNumberPattern)
-  if(!prNumber || prNumber.length < 1) {
+  const prNumberMatches = prLink.match(prNumberPattern)
+  if(!prNumberMatches || prNumberMatches.length < 1) {
     core.setOutput('isValid', false)
     throw `Error parsing application PR link (${prLink}).`
   } 
   
-  prNumber = prNumber[0]
+  prNumber = prNumberMatches[0]
   console.log(`PR number is ${prNumber}`)
   var client = github.client();
 
