@@ -2199,32 +2199,32 @@ const main = async () => {
   const prNumberPattern = /(?<=pull\/)\d*/g
 
   const prNumberMatches = prLink.match(prNumberPattern)
-  if(!prNumberMatches || prNumberMatches.length < 1) {
+  if (!prNumberMatches || prNumberMatches.length < 1) {
     core.setOutput('isValid', false)
     throw `Error parsing application PR link (${prLink}).`
-  } 
-  
+  }
+
   const prNumber = prNumberMatches[0]
   console.log(`PR number is ${prNumber}`)
-  var client = github.client();
+  var client = github.client()
 
   var ghpr = client.pr(`${targetRepoOwner}/${targetRepo}`, prNumber)
 
-  console.log("Getting PR info...")
+  console.log('Getting PR info...')
   // Wait for the response
-  const prData = await ghpr.infoAsync();
+  const prData = await ghpr.infoAsync()
   // res is (data, error)
   // const prData = res[0];
-  console.log(`Got PR info as ${prData}`)
+  console.log(`Got PR info as ${prData[0]}`)
 
   // Making sure that the PR was merged
-  if ( !prData.merged ) {
+  if (!prData[0].merged) {
     core.setOutput('isValid', false)
     throw `Application PR is not yet approved.`
-//       core.setOutput('isValid', false)
-  } 
-  
-  const originalPrAuthor = prData.user.login
+    //       core.setOutput('isValid', false)
+  }
+
+  const originalPrAuthor = prData[0].user.login
   // Making sure it's the same user
   if (originalPrAuthor !== author) {
     core.setOutput('isValid', false)
