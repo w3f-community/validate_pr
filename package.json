@@ -1,0 +1,26 @@
+{
+  "name": "validate_pr",
+  "private": false,
+  "version": "0.2.0",
+  "license": "MIT",
+  "description": "Validate W3F Open Grant Milestone delivery pull request",
+  "scripts": {
+    "test": "prettier-standard index.js && standard index.js",
+    "build": "ncc build index.js",
+    "version": "npm run build && git add dist",
+    "release": "np && git tag -f v1 && git push --tags -f"
+  },
+  "np": {
+    "publish": false
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "octonode": "^0.10.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5",
+    "np": "^7.5.0",
+    "prettier-standard": "^15.0.1",
+    "standard": "^14.3.1"
+  }
+}
